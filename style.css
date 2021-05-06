@@ -1,0 +1,296 @@
+@import 'reset.css';
+@import 'colorscheme.css';
+@import 'scrollbars.css';
+
+*:focus {
+    outline:none;
+}
+
+html {
+    background-color: var(--background);
+    color: var(--foreground);
+    font: 16px/1.5 Inter;
+    user-select: none;
+}
+body {
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-y:overlay;
+}
+body.parsing {
+    overflow-y: hidden;
+}
+a {
+    color: var(--foreground);
+    text-decoration: none;
+}
+select {
+    background-color: var(--z-0);
+    color: var(--foreground);
+    display: inline-block;
+    border: 1px solid transparent;
+    padding: .25em .35em;
+    margin-top: .25rem;
+    border-radius: 3px;
+    font: 12px/1.5 Inter;
+}
+code {
+    font-family: monospace
+}
+#datetime {
+    margin: 1rem 2rem;
+    padding: 0 0 .5rem 0;
+    display: inline-block;
+    border-bottom: 4px solid var(--foreground);
+    filter: drop-shadow(0 4px 2px var(--border-color))
+}
+#time {
+    font: bold 8rem/1 Inter;
+    letter-spacing: -.05em;
+    float: right;
+}
+#date {
+    font: 600 1.5rem/1 Inter;
+    letter-spacing: -.015em;
+    float: right;
+}
+main {
+    margin: 1rem 2rem;
+}
+.site {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 .5rem 1rem 0;
+    padding: .5rem;
+    background-color: var(--z-0);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px var(--border-color);
+    border-radius: 5px;
+}
+.site a,
+.site span.main {
+    display: inline-block;
+    border: 1px solid transparent;
+    padding: .25em .35em;
+    margin-bottom: .25rem;
+    border-radius: 3px;
+}
+.site a:hover,
+.site a:focus,
+.site select:hover,
+.site select:focus,
+.directory .update:hover,
+.group button:hover,
+.group button:focus {
+    border: 1px solid var(--border-color);
+    background-color: var(--z-1);
+    transition: .1s border-color, .1s background-color;
+}
+.site > a > img,
+.site > span.main > img {
+    display: inline-block;
+    height: 1em;
+    vertical-align: bottom;
+}
+.site a.main {
+    font: 500 1.2rem/1 Inter;
+}
+.site a.action:last-child {
+    margin-bottom: 0;
+}
+.site input {
+    width: 100%;
+    padding: .5em .75em;
+    background-color: var(--background);
+    color: var(--foreground);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 6px inset var(--border-color);
+    border-radius: 3px;
+    transition: .1s border-color;
+}
+form:not(:first-of-type) input {
+    margin-top: .25rem;
+}
+.directory:not(:last-child) {
+    margin-bottom: .25rem;
+}
+.site input:hover {
+    border-color: var(--hover);
+}
+.site input:focus {
+    border-color: var(--focus);
+}
+.directory {
+    max-width: 225.5px;
+}
+.directory input {
+    margin-bottom: .25rem;
+}
+.directory .update {
+    vertical-align: middle;
+    border: 0;
+    position: relative;
+    background: transparent;
+    padding: 3px 3px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+}
+.directory .update::after {
+    content: 'Update';
+    background-color: var(--border-color);
+    color: var(--foreground);
+    padding: .25em .35em;
+    font-size: 12px;
+    position: absolute;
+    left: 50%;
+    z-index: 1000;
+    bottom: 32px;
+    transform: translateX(-50%);
+    visibility:hidden;
+    opacity: 0;
+    transition: .1s opacity;
+}
+.directory .update:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+.group button {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    color: var(--foreground);
+    border: 1px solid transparent;
+    padding: .35em .35em .35em .5em;
+    font-size: 14px;
+    border-radius: 3px;
+}
+.group button img {
+    float: right;
+    height: 1em;
+    margin-left: .25em;
+    transition: .1s transform
+}
+.group button:focus img,
+.group button:hover img {
+    transform: rotate(45deg);
+}
+.group ul {
+    max-height: 0;
+    overflow: hidden;
+    font-size: 14px;
+    visibility: hidden;
+    transition: visibility steps(1,end) .2s , .2s max-height;
+}
+.group ul li {
+    margin-left: .75em;
+}
+.group ul li a {
+    margin: .125em;
+}
+.group .group {
+    width: calc(100% - 1.5em)
+}
+.group a {
+    max-width: calc(100% - 2.5em);
+    line-height: 1.5;
+    padding: 1.5px .35em;
+}
+.directory .flat a {
+    line-height: 1.5;
+    padding: 1.5px .35em;
+    font-size: 14px;
+}
+.directory.filtering .flat {
+    display: none;
+}
+.directory.filtering .flat.match {
+    display: block;
+}
+.visible.group > button img {
+    transform: rotate(90deg);
+}
+.visible.group > ul {
+    max-height: 400px;
+    overflow-y: overlay;
+    visibility: visible;
+    transition: .2s max-height;
+}
+.visible.group > ul::-webkit-scrollbar {
+    background-color: transparent!important;
+    width: 16px!important;
+}
+.visible.group > ul::-webkit-scrollbar-thumb {
+    border-color: var(--z-0)!important;
+}
+
+.filtering li {
+    display: none;
+}
+.filtering li.match {
+    display: block;
+}
+
+div.parser {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+}
+div.parser .box {
+    position: relative;
+    width: 90vw;
+    max-width: 80ch;
+    height: calc(100vh - 4rem);
+    max-height: 100ch;
+    margin: 2rem auto 2rem;
+    background-color: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    text-align: center;
+}
+.box .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: 0;
+    padding: .25rem .25rem 0 0;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.box textarea {
+    box-sizing: border-box;
+    display: block;
+    width: calc(100% - 3rem);
+    height: calc(100% - 5rem);
+    margin: 1.5rem 1.5rem .5rem 1.5rem;
+    background-color: rgba(0,0,0,0.3);
+    box-shadow: 0 0 6px inset black;
+    padding: 1em;
+    resize: none;
+    border: 0;
+    border-radius: 5px;
+    color: var(--foreground)
+}
+.box .parse {
+    height: 2.5rem;
+    cursor: pointer;
+    width: 50%;
+    border: 1px solid var(--border-color);
+    background-color: var(--z-1);
+    color: var(--foreground);
+    font: 400 1rem Inter;
+    border-radius: 5px;
+}
+.box .parse:hover {
+    background-color: var(--z-0);
+}
+.expanding.group ul {
+    overflow-y: hidden;
+}
