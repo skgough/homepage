@@ -1,4 +1,6 @@
-showTime();
+showTime()
+weather()
+
 
 let searchBars = document.querySelectorAll('form.search')
 searchBars.forEach(bar => {
@@ -112,4 +114,33 @@ function expand(element) {
     group.classList.toggle('expanding');
     group.classList.toggle('visible');
     setTimeout(() => { group.classList.toggle('expanding') }, 200);
+}
+function weather() {
+    const weatherEl = document.querySelector('#weather')
+    const weatherIcon = document.querySelector('#icon > img')
+    const shortDesc = document.querySelector('#icon > div')
+    const temp = document.querySelector('#temp')
+    const riseTime = document.querySelector('#rise')
+    const setTime = document.querySelector('#set')
+    getWeather().then((weather) => {
+        weatherIcon.src = `weather/${weather.weather[0].icon}.png`
+        shortDesc.innerText = weather.weather[0].main
+        temp.innerText = `${parseInt(weather.main.temp)}°F`
+        riseTime.innerText = `Sunrise: ${getTimeFromUnix(weather.sys.sunrise)}`
+        setTime.innerText = `Sunset: ${getTimeFromUnix(weather.sys.sunset)}`
+    })
+}
+async function getWeather() {
+    const apiKey = '8adbb1fa691cf9ffeb5699685ae4c1bc'
+    const cityID = 4612862
+    const units = 'imperial'
+    const request = await fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityID}&appid=${apiKey}&units=${units}`)
+    const response = await request.json()
+    return response
+}
+function getTimeFromUnix(timestamp) {
+    const date = new Date(timestamp * 1000);
+    const hours = date.getHours();
+    const minutes = "0" + date.getMinutes();
+    return hours + ':' + minutes.substr(-2)
 }

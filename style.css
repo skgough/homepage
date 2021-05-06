@@ -294,3 +294,33 @@ div.parser .box {
 .expanding.group ul {
     overflow-y: hidden;
 }
+#weather {
+    float: right;
+    margin-right: 1em;
+    display: flex;
+    filter: drop-shadow(0 4px 2px var(--border-color))
+}
+#icon div {
+    text-align: center;
+    font: 700 18px/1 sans-serif;
+    vertical-align: top;
+}
+#icon img {
+    height: 150px;
+}
+#text {
+    height: 172px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#temp {
+    font: 800 60px/120px sans-serif;
+}
+#sunTimes {
+    font: 700 18px/1 sans-serif;
+    text-align: right;
+}
+#rise {
+    margin-bottom: .25em;
+}
