@@ -9,7 +9,7 @@
 html {
     background-color: var(--background);
     color: var(--foreground);
-    font: 16px/1.5 Inter;
+    font: 16px/1.5 Inter, system-ui, sans-serif;
     user-select: none;
 }
 body {
